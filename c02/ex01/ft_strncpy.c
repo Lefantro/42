@@ -23,18 +23,18 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	}
 	return (dest);
 }
-
+/*
 int	main(void)
 {
 	char	*p;
 	char	*q;
 
-
-	q = (char *)malloc(sizeof(char)*50);
-	q[6]='o';
-	q[5]='m';
-	p = "1234567890";
-	ft_strncpy(q, p, 6);
-	printf("%s", q);
-	printf ("\n%c", q[5]);
+	q = (char *)malloc(sizeof(char) * 50);
+	q[12] = 'o';
+	q[15] = 'm';
+	p = "1234\0 567890";
+	strncpy(q, p, 15);
+	printf("%s\n", q);
+	printf("\n%c", q[12]);
 }
+*/
