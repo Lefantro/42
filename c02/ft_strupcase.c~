@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char	uppercase(char c)
+{
+	if ((c >= 'a') && (c <= 'z'))
+	{
+		return (c - 32);
+	}
+	else
+	{
+		return (c);
+	}
+}
+
+char	ft_strupcase(char *str)
+{
+	int		i;
+	char	*tmp;
+	char	c;
+
+	c = *str;
+	i = 0;
+	while (c != '\0')
+	{
+		*(tmp + i) = uppercase(c);
+		i = i + 1;
+		c = *(str + i);
+	}
+	return (tmp);
+}
+int	main(int argc, char **argv)
+{
+	char	*p;
+	char	upcase;
+
+	p = (char *)malloc(sizeof(char));
+	p = argv[argc - 1];
+	upcase = ft_strupcase(p);
+	printf("%s", upcase);
+}

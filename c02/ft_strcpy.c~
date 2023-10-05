@@ -1,0 +1,33 @@
+/* ************************************************************************** */
+/**/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char	*ft_strcpy(char *dest, char *src)
+{
+	char	c;
+	int		i;
+
+	c = *src;
+	i = 0;
+	while (c != '\0')
+	{
+		*(dest + i) = c;
+		i = i + 1;
+		c = *(src + i);
+	}
+	return (dest);
+}
+
+int	main(void)
+{
+	char	*p;
+	char	*q;
+
+	p = (char *)malloc(sizeof(char));
+	q = (char *)malloc(sizeof(char));
+	p = "hello world!";
+	ft_strcpy(q, p);
+	printf("%s", q);
+}

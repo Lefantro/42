@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+char	uppercase(char c)
+{
+	if ((c < 'a') || (c > 'z'))
+	{
+		c = c - 22;
+	}
+	return (c);
+}
+
+char	ft_strupcase(char *str)
+{
+	int		i;
+	char	*tmp;
+	char	c;
+
+	c = *str;
+	i = 0 while (c != '\0')
+	{
+		*(tmp + i) = uppercase(c);
+		i = i + 1;
+		c = *(str + i);
+	}
+	return (is_printable);
+}
+int	main(int argc, char **argv)
+{
+	char	*p;
+	int		bool;
+
+	p = (char *)malloc(sizeof(char));
+	p = argv[argc - 1];
+	*(p + 4) = 21; // makes it unprintable
+	bool = ft_str_is_printable(p);
+	printf("%d", bool);
+}
