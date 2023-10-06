@@ -1,43 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strupcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 12:51:14 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/05 12:51:54 by aafuni           ###   ########.fr       */
+/*   Created: 2023/10/05 13:33:59 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/05 13:34:02 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-*/
-char	*ft_strcpy(char *dest, char *src)
+
+char	uppercase(char c)
+{
+	if ((c >= 97) && (c <= 122))
+	{
+		return (c - 32);
+	}
+	else
+	{
+		return (c);
+	}
+}
+
+char	*ft_strupcase(char *str)
 {
 	char	c;
 	int		i;
+	char	*tmp;
 
-	c = *src;
+	c = *str;
 	i = 0;
+	tmp = (char *) malloc (sizeof(char) * 5000);
 	while (c != '\0')
 	{
-		*(dest + i) = c;
+		*(tmp + i) = uppercase(c);
 		i = i + 1;
-		c = *(src + i);
+		c = *(str + i);
 	}
-	return (dest);
+	return (tmp);
 }
 /*
 int	main(void)
 {
-	char	*p;
-	char	*q;
+	char	*str;
+	char	*str2;
 
-	q = (char *)malloc(sizeof(char) * 50);
-	p = "hello world!01234\0";
-	ft_strcpy(q, p);
-	printf("%s", q);
+	str = "hello everyb0dy \n";
+	str2 = ft_strupcase(str);
+	printf("%s", str2);
 }
 */

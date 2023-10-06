@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 12:51:14 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/05 12:51:54 by aafuni           ###   ########.fr       */
+/*   Created: 2023/10/05 13:20:16 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/05 13:23:58 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
+/* ************************************************************************** */
+/*                                                                            */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-*/
-char	*ft_strcpy(char *dest, char *src)
-{
-	char	c;
-	int		i;
 
-	c = *src;
-	i = 0;
+int	ft_str_is_uppercase(char *str)
+{
+	int		is_uppercase;
+	char	c;
+
+	c = *str;
+	is_uppercase = 1;
 	while (c != '\0')
 	{
-		*(dest + i) = c;
-		i = i + 1;
-		c = *(src + i);
+		if ((c < 'A') || (c > 'Z'))
+		{
+			is_uppercase = 0;
+		}
+		str = str + 1;
+		c = *str;
 	}
-	return (dest);
+	return (is_uppercase);
 }
 /*
-int	main(void)
+int	main()
 {
-	char	*p;
-	char	*q;
-
-	q = (char *)malloc(sizeof(char) * 50);
-	p = "hello world!01234\0";
-	ft_strcpy(q, p);
-	printf("%s", q);
+	int bool;
+	bool = ft_str_is_uppercase("UPPERCASEONLY");
+	printf("%d", bool);
 }
 */

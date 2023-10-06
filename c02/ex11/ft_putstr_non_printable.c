@@ -61,6 +61,7 @@ void	ft_putstr_non_printable(char *str)
 	}
 }
 
+/*
 int	main(int argc, char **argv)
 {
 	char	*p;
@@ -71,3 +72,4 @@ int	main(int argc, char **argv)
 	*(p + 4) = 21; // makes it unprintable
 	ft_putstr_non_printable(p);
 }
+*/

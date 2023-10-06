@@ -1,46 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 13:09:56 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/05 13:10:02 by aafuni           ###   ########.fr       */
+/*   Created: 2023/10/05 13:26:06 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/05 13:26:58 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_str_is_alpha(char *str)
+int	ft_str_is_lowercase(char *str)
 {
-	int		is_alpha;
+	int		is_lowercase;
 	char	c;
 
 	c = *str;
-	is_alpha = 1;
+	is_lowercase = 1;
 	while (c != '\0')
 	{
-		if (!((('a' <= c) && (c <= 'z')) || (('A' <= c) && (c <= 'Z'))))
+		if ((c < 'a') || (c > 'z'))
 		{
-			is_alpha = 0;
+			is_lowercase = 0;
 		}
 		str = str + 1;
 		c = *str;
 	}
-	return (is_alpha);
+	return (is_lowercase);
 }
-
 /*
-int	main(void)
+ * int	main(int argc, char **argv)
 {
 	char	*p;
 	int		bool;
 
 	p = (char *)malloc(sizeof(char));
-	p = "helloworld";
-	bool = ft_str_is_alpha(p);
+	p = argv[argc - 1];
+	bool = ft_str_is_lowercase(p);
 	printf("%d", bool);
 }
 */

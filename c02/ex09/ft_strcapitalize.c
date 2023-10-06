@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/05 13:52:30 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/05 13:53:20 by aafuni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -57,66 +68,17 @@ int	beginning_of_word(char c, char prev)
 	}
 }
 
-/*
 char	*ft_strcapitalize(char *str)
 {
-	char	c;
-	char	prev;
-	char	*tmp;
-	int		i;
-	char	c;
-	int		i;
-	char	prev;
-	char	c;
-	char	prev;
-	char	*tmp;
-	int		i;
-	char	c;
-	char	prev;
-	int		i;
-	char	c;
-	char	prev;
-	char	*tmp;
-	int		i;
 	char	c;
 	char	prev;
 	int		i;
 	char	*tmp;
 
-	c=*str;
-	prev=' ';
-	i=0;
-	while (c != '\0')
-	{/*
-		if (beginning_of_word (c, prev))
-		{
-			tmp[i]=uppercase(c);
-		}
-		else
-		{
-			*(tmp + i) = lowercase(c);
-		}
-		printf ("%c %c", c, prev);
-		i = i+1;
-		str = str+1;
-		prev=c;
-		c=*str;
-	}
-	if (i==0)
-	{
-		return (str);
-	}
-	else
-	{
-		return (tmp);
-	}
-}*/
-char	*ft_strcapitalize(char *str)
-{
 	c = *str;
 	prev = ' ';
 	i = 0;
-	tmp = (char *)malloc(sizeof(char) * 500);
+	tmp = (char *)malloc(sizeof(char) * 5000);
 	while (c != '\0')
 	{
 		if (beginning_of_word(c, prev))
@@ -132,10 +94,8 @@ char	*ft_strcapitalize(char *str)
 		c = *(str + i);
 	}
 	return (tmp);
-	printf("%s", tmp);
-	// return (str);
 }
-
+/*
 int	main(void)
 {
 	char	*str;
@@ -145,3 +105,4 @@ int	main(void)
 	str2 = ft_strcapitalize(str);
 	printf("%s", str2);
 }
+*/
