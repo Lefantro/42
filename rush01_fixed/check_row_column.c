@@ -47,12 +47,11 @@ int	check_row_right(int row, int matrix[SIZE][SIZE])
 	return (0);
 }
 
-
 int	check_col_up(int matrix[SIZE][SIZE])
 {
-	int				row;
-	int				col;
-	int		tallest;
+	int	row;
+	int	col;
+	int	tallest;
 	int	count;
 
 	col = 1;
@@ -71,49 +70,46 @@ int	check_col_up(int matrix[SIZE][SIZE])
 			row++;
 		}
 		if (count != matrix[0][col])
-		{printf ("column %i \n", col);
-			return (0);}
+			return (0);
 		col++;
 	}
 	return (1);
 }
 
-int check_col_down (int matrix[SIZE][SIZE])
+int	check_col_down(int matrix[SIZE][SIZE])
 {
-	int row;
-	int col;
-	int tallest;
-	int count;
+	int	row;
+	int	col;
+	int	tallest;
+	int	count;
 
 	col = 1;
 	while (col < SIZE - 1)
 	{
-		row = SIZE - 2;;
+		row = SIZE - 2;
 		tallest = 0;
 		count = 0;
 		while (row > 0)
 		{
-			if (matrix[row][col] > tallest )
+			if (matrix[row][col] > tallest)
 			{
 				tallest = matrix[row][col];
 				count++;
 			}
 			row--;
 		}
-		if (count != matrix[SIZE-1][col])
-		{
-			printf ("col doen %i\n", col);
-			return 0;}
+		if (count != matrix[SIZE - 1][col])
+			return (0);
 		col++;
 	}
 	return (1);
 }
 
-int check_columns (int matrix[SIZE][SIZE])
+int	check_columns(int matrix[SIZE][SIZE])
 {
 	if (check_col_up(matrix) && check_col_down(matrix))
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }
 
 /*

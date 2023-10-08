@@ -16,14 +16,14 @@
 
 int	no_repeat(int row, int col, int matrix[][SIZE])
 {
-	int num;
-	int idx;
+	int	num;
+	int	idx;
 
 	idx = 1;
 	num = matrix[row][col];
-	while (idx < SIZE-1)
+	while (idx < SIZE - 1)
 	{
-		if (matrix[idx][col] ==  num && idx != row)
+		if (matrix[idx][col] == num && idx != row)
 			return (0);
 		else if (matrix[row][idx] == num && idx != col)
 			return (0);
@@ -32,16 +32,18 @@ int	no_repeat(int row, int col, int matrix[][SIZE])
 	return (1);
 }
 /*
-int main()
+int	main(void)
 {
+	int	res;
+
   int matrix[6][6] = {	{0, 0, 0, 0, 0, 0},
 			{0, 1, 3, 1, 2, 0},
 			{0, 1, 2, 4, 3, 0},
 			{0, 1, 1, 0, 4, 0},
 			{0, 4, 4, 3, 1, 0},
 			{0, 0, 0, 0, 0, 0}};
-	int res = no_repeat(3,3, matrix);
+	res = no_repeat(3,3, matrix);
 	printf("%d\n", res);
-	return 0;
+	return (0);
 }
 */

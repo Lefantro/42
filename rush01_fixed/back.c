@@ -23,25 +23,25 @@ void	write_matrix(int matrix[SIZE][SIZE]);
 void	back(int row, int col, int matrix[][SIZE], int *solution)
 {
 	int	value;
-	
-	if ((row == 5)&&(check_columns (matrix)))
-	{	*solution = 1;
+
+	if ((row == 5) && (check_columns(matrix)))
+	{
+		*solution = 1;
 		write_matrix(matrix);
 	}
 	value = 1;
 	while (value <= 4)
 	{
 		matrix[row][col] = value;
-
 		if (no_repeat(row, col, matrix))
-		{	
+		{
 			if (col < 4)
-				back (row, col + 1, matrix, solution);
-			else if (check_row_left(row, matrix) && check_row_right(row, matrix))
-				back (row+1, 1, matrix, solution);
-
+				back(row, col + 1, matrix, solution);
+			else if (check_row_left(row, matrix) && check_row_right(row,
+					matrix))
+				back(row + 1, 1, matrix, solution);
 		}
-		matrix[row][col]=0;
+		matrix[row][col] = 0;
 		value++;
 	}
 }
