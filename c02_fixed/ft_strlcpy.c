@@ -6,36 +6,36 @@
 #include <string.h>
 #include <unistd.h>
 
-int	ft_strlcpy(char *dest, char *src, unsigned int size)
-{
-	unsigned int		i;
+unsigned int	ft_strlen(char *str);
 
-	i = 0;
-	while (*(src + i))
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i;
+
+	if (size)
 	{
-		if (i < size - 1)
+		while (*(src + i) && (i < size - 1))
+		{
 			*(dest + i) = *(src + i);
-		i = i + 1;
+			i = i + 1;
+		}
+		*(dest + i) = '\0';
 	}
-	if (size < i)
-		dest[size - 1] = '\0';
-	else
-		dest[i] = '\0';
-	return (i);
+	return (ft_strlen (src));
 }
 
-void	test(char *alphabet, int n)
+unsigned int	ft_strlen(char *str)
 {
-	int	i;
+	unsigned int	position;
 
-	i = 0;
-	while (i < 13)
+	position = 0;
+	while (str[position] != '\0')
 	{
-		printf("%c", alphabet[i]);
-		i = i + 1;
+		position = position + 1;
 	}
-	printf(" %d", n);
+	return (position);
 }
+/*
 int	main(void)
 {
 	char	*p;
@@ -43,9 +43,10 @@ int	main(void)
 	char	test[40];
 
 	int ft_n, n, size;
-	size = 15;
-	p = "0123456789abcde";
+	size = 0;
+	p = "0123456789\ab";
 	ft_n = ft_strlcpy(ft_test, p, size);
-	n = strlcpy (test, p, size);
-	printf ("%i vs %i | %i\n", ft_n, n, strcmp (ft_test, test));
+	   n =    strlcpy(test, p, size);
+	printf("%i vs %i | %i\n", ft_n, n, strcmp(ft_test, test));
 }
+*/
