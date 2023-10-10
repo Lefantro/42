@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main3.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dzubkova <dzubkova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 12:00:19 by dzubkova          #+#    #+#             */
-/*   Updated: 2023/10/08 13:41:05 by dzubkova         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:21:49 by dzubkova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 #define MAX 52
 #define MIN 49
@@ -25,10 +24,10 @@ void	write_matrix(int matrix[SIZE][SIZE]);
 
 int	main(int argc, char **argv)
 {
-	int		args[16];
+	int		args[INPUT_SIZE];
 	char	*str;
 	int		status;
-	int		matrix[6][6];
+	int		matrix[SIZE][SIZE];
 	int		solution;
 
 	solution = 0;
@@ -53,29 +52,29 @@ int	main(int argc, char **argv)
 
 int	read_and_check_args(char *str, int *args)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (*(str+i))
+	while (*(str + i))
 	{
-	  if ((*(str + i) < MIN || *(str + 1)> MAX)&& (*(str + i) != 32))
-		    return (1);
-		else if (*(str+i)>= MIN && *(str+i) <= MAX)
-		  {
-		    if (i % 2)
-		      return (1);
-		    else
-		      *(args + (i / 2)) = *(str + i) - 48;
-		  }
-		else if (*(str+i) == 32 && i % 2 == 0)
-		    return (1);
-		else if (i == 32)
-		  return (1);
-	  i = i + 1;
+		if ((*(str + i) < MIN || *(str + 1) > MAX) && (*(str + i) != 32))
+			return (1);
+		else if (*(str + i) >= MIN && *(str + i) <= MAX)
+		{
+			if (i % 2)
+				return (1);
+			else
+				*(args + (i / 2)) = *(str + i) - 48;
+		}
+		else if (*(str + i) == 32 && i % 2 == 0)
+			return (1);
+		else if (i == (INPUT_SIZE * 2) - 1)
+			return (1);
+		i++;
 	}
-	if (i+1 != INPUT_SIZE * 2)
-	  return 1;
-	return 0;
+	if (i + 1 != (INPUT_SIZE * 2))
+		return (1);
+	return (0);
 }
 
 void	initialize_matrix(int *args, int matrix[SIZE][SIZE])

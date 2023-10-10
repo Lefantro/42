@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 19:52:01 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/10 19:52:16 by aafuni           ###   ########.fr       */
+/*   Created: 2023/10/10 19:52:41 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/10 19:52:43 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_strlen(char *str)
+void	ft_nonzero(int n)
 {
-	int	position;
+	char	digit;
 
-	position = 0;
-	while (str[position] != '\0')
+	if (n < 0)
+	  {
+	    write (1, "-", 1);
+	    n = - n;
+	  }
+	if (n != 0)
 	{
-		position = position + 1;
+		digit = n % 10 + '0';
+		ft_nonzero(n / 10);
+		write(1, &digit, 1);
 	}
-	return (position);
+}
+
+void ft_putnbr (int n)
+{
+  if (n == 0)
+    write (1, "0", 1);
+  else
+    ft_nonzero (n);
 }
 /*
-int main (void)
+int	main(void)
 {
-	int		nr;
-	char	c;
-
-	nr=ft_strlen("1234567");
-	c=nr+'0';
-	write (1, &c, 1);
+  ft_putnbr(-3455677);
 }
 */

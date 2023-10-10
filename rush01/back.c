@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   back.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: dzubkova <dzubkova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 21:54:58 by aafuni            #+#    #+#             */
-
+/*   Created: 2023/10/08 13:03:41 by dzubkova          #+#    #+#             */
+/*   Updated: 2023/10/08 17:17:39 by dzubkova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
+
 #define SIZE 6
 
 int		no_repeat(int row, int col, int matrix[][SIZE]);
@@ -20,27 +20,31 @@ int		check_row_left(int row, int matrix[SIZE][SIZE]);
 int		check_columns(int matrix[SIZE][SIZE]);
 void	write_matrix(int matrix[SIZE][SIZE]);
 
-int	back(int row, int col, int matrix[][SIZE])
+void	back(int row, int col, int matrix[][SIZE], int *solution)
 {
 	int	value;
-	
-	if ((row == 5)&&(check_columns (matrix)))
-		write_matrix(matrix);
-	value = 1;
-	while (value <= 4)
+
+	if (row == SIZE - 1)
 	{
-		matrix[row][col] = value;
-
-		if (no_repeat(row, col, matrix))
-		{	
-			if (col < 4)
-				back (row, col + 1, matrix);
-			else if (check_row_left(row, matrix) && check_row_right(row, matrix))
-				back (row+1, 1, matrix);
-
+		if (check_columns(matrix))
+		{
+			*solution = 1;
+			write_matrix(matrix);
 		}
-		matrix[row][col]=0;
-		value++;
+		return ;
 	}
-	return (0);
+	value = 1;
+	while (value <= (SIZE - 2))
+	{
+		matrix[row][col] = value++;
+		if (no_repeat(row, col, matrix))
+		{
+			if (col < (SIZE - 2))
+				back(row, col + 1, matrix, solution);
+			else if (check_row_left(row, matrix) && check_row_right(row,
+					matrix))
+				back(row + 1, 1, matrix, solution);
+		}
+		matrix[row][col] = 0;
+	}
 }

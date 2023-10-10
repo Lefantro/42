@@ -6,10 +6,10 @@
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:45:45 by aafuni            #+#    #+#             */
-/*   Updated: 2023/09/29 11:45:47 by aafuni           ###   ########.fr       */
+/*   Updated: 2023/10/10 19:52:30 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+
 
 void	ft_putstr(char *str)
 {
@@ -23,7 +23,7 @@ void	ft_putstr(char *str)
 	write(1, str, position);
 }
 
-/*
+/**/
 int	main(void)
 {
 	char	*str;

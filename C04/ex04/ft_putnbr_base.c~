@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int base_valid (char *base);
+
+int convert_to_base (int n, int base);
+
+void print_number (int n, char *base);
+
+
+void ft_putnbr_base (int nbr, char *base)

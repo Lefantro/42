@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*   By: gbrown <gbrown@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 19:52:01 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/10 19:52:16 by aafuni           ###   ########.fr       */
+/*   Created: 2023/09/30 11:07:12 by gbrown            #+#    #+#             */
+/*   Updated: 2023/09/30 17:20:09 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	ft_strlen(char *str)
+int	main()
 {
-	int	position;
-
-	position = 0;
-	while (str[position] != '\0')
-	{
-		position = position + 1;
-	}
-	return (position);
+	rush01(5,3);
+	return 0;
 }
-/*
-int main (void)
-{
-	int		nr;
-	char	c;
-
-	nr=ft_strlen("1234567");
-	c=nr+'0';
-	write (1, &c, 1);
-}
-*/
