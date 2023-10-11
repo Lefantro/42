@@ -17,10 +17,10 @@ void	ft_nonzero(int n)
 	char	digit;
 
 	if (n < 0)
-	  {
-	    write (1, "-", 1);
-	    n = - n;
-	  }
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
 	if (n != 0)
 	{
 		digit = n % 10 + '0';
@@ -29,12 +29,12 @@ void	ft_nonzero(int n)
 	}
 }
 
-void ft_putnbr (int n)
+void	ft_putnbr(int n)
 {
-  if (n == 0)
-    write (1, "0", 1);
-  else
-    ft_nonzero (n);
+	if (n == 0)
+		write(1, "0", 1);
+	else
+		ft_nonzero(n);
 }
 /*
 int	main(void)

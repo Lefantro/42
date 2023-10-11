@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/29 11:45:45 by aafuni            #+#    #+#             */
-/*   Updated: 2023/10/10 23:33:37 by aafuni           ###   ########.fr       */
+/*   Created: 2023/10/11 00:04:56 by aafuni            #+#    #+#             */
+
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putstr(char *str)
-{
-	int	position;
+#include <stdio.h>
 
-	position = 0;
-	while (str[position] != '\0')
+int     ft_iterative_factorial (int nb)
+{
+    int returned;
+
+    returned = 1;
+	if (nb == 0)
+		return 1;
+	else if (nb > 0)
+        while (nb)
+        {
+            returned *= nb;
+            nb--;
+        }
+    else
 	{
-		position = position + 1;
+		return (0);
 	}
-	write(1, str, position);
+	return (returned);
 }
 
-/*
-int	main(void)
+int main()
 {
-	char	*str;
-
-	str = "This is a long string";
-	ft_putstr(str);
+    printf ("%i\n", ft_iterative_factorial (6));
 }
-*/
