@@ -1,0 +1,19 @@
+int ft_sqrt (int nb)
+
+{
+	if (nb <= 0)
+		return 0;
+	
+}
+
+int interv (int a, int b, int nb)
+{
+	if (a == b) and (a * a == nb)
+					return a;
+	else if ((a*a < nb)&&((a+b)*(a+b)/4 > nb))
+		return interv (a, (a+b)/2, nb);
+	else if (((a+b)*(a+b)/4 < nb) && (nb < b*b))
+		return interv ((a+b)/2, b, nb))
+	else
+		return 0;
+}
