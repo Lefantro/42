@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+struct entry
+{
+	char *key;
+	char *value;
+};
+
+typedef struct entry entry_t;
+
+
+//entry_t *read_file (char *filename)
+int main()
+{
+	entry_t dictionary[100];
+	int ptr=0;
+
+	dictionary[0].key = "0";
+	dictionary[0].value = "zero";
+	ptr++;
+
+	char data[5000];
+	char *filename = "numbers.dict";
+	
+	int fd = open(filename, O_RDONLY);
+	printf ("%i\n\n", fd);
+
+	ssize_t read_bytes = read (fd, data, 5000);
+	printf ("%i %c", read_bytes, data[689]);
+	close (fd);
+
+	//return dictionary
+}
