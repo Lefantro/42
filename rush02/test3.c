@@ -3,20 +3,20 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-struct number
+struct s_number
 {
 	char *key;
 	char *value;
 };
 
-struct order
+struct s_order
 {
 	int key;
 	char *value;
 };
 
-typedef struct number number_t;
-typedef struct order order_t;
+typedef struct s_number t_number;
+typedef struct s_order t_order;
 
 
 
@@ -54,49 +54,59 @@ int read_filename (char *filename, char *data)
 /* 	ptr++; */
 /* } */
 
-void parse_line (char *line )//number_t dict1; order_t dict2)
+void parse_line (char *line, char *key, char *value)
 {
   int j;
-  char *key;
-  char *value;
   int is_key;
 
       is_key = 1;
       j = 0;
-      key = (char*)malloc(sizeof(char)*40);
-      value = (char *)malloc(sizeof(char)*100);
+      while (*line != ':')
+	{
+	  if (*line != ' ')
+		  key[j++]= *line;
+	  line ++;
+	}
+      key[j+1]='\0';
+      line ++;
+      j = 0;
       while (*line)
-	{ 
-	  if (*line == ':')
-	    {
-	      is_key = 0;
-	      j = 0;
-	      line ++;
-	    }
-	  if ((*line != ' ')&&(is_key))
-	      {
-		*(key + j)= *line;
-		j++;
-	      }
-	  if ((*line != ' ')&&(is_key == 0))
+      {
+	if (*line != ' ')
 	      {
 		*(value+j) = *line;
 		j++;
 	      }
-	  line ++;
-	}
-      printf ("%s\n", value);
-      //    add_to_dictionary (key, value);
+	line ++;
+       }
+      value [j+1] = '\0';
 }
-  
+
+
+int check_line (char *line)
+{
+  int i;
+  int is_key;
+  is_key = 1;
+  while (*(line+i))
+    { if (*(line +i) == ':')
+	  is_key = 0;
+      if (*(line +i) <32 || *(line +i) == 127)
+	return 0;
+      if ((is_key)&&(!char_in_string (*(line+i), " 0123456789")))
+      i++;
+    }
+  if ((is_key)&&(i))
+	return 0;
+}
 int read_lines (char *data)
 { char *line;
   int i;
-
+  char *key;
+  char *value;
 
   while (data)
     {
-      if ((*data < 32) || (*data > 126)) return 0;
       i = 0;
       line = (char *) malloc (sizeof (char) * 100);
       while (*data != '\n')
@@ -105,11 +115,17 @@ int read_lines (char *data)
 	  i ++;
 	  data ++;
 	}
-      parse_line (line);
+      if (check_line (line))
+	return 0;
+      key = (char*)malloc(sizeof(char)*40);
+      value = (char *)malloc(sizeof(char)*100);
+      parse_line (line,key, value);
+      //add_to_dict (key, value);
+      //printf ("%s %s\n", key, value);
       data ++;
     }
   return 1;
-}
+} //26 lines
 
 int main()
 { 	char *filename;
