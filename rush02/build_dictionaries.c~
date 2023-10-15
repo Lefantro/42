@@ -1,0 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_dictionaries.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/15 00:28:12 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/15 00:28:16 by aafuni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void add_entry_to_dict (char *key, char *value, t_dict *number, t_dict *order)
+{
+	if (ft_strlen (key) <= 3)
+		add_to_number (key, val, number);
+	else
+		add_to_order (key, val, order);
+}
