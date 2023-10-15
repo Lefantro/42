@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int ft_strlen (char *str);
+int		ft_strlen(char *str);
 
 int	ft_atoi(char *str)
 {
@@ -24,7 +24,7 @@ int	ft_atoi(char *str)
 	number = 0;
 	minus = 1;
 	c = *str;
-	while ((c == 32) || ((c < 8) && (c > 13)) || (c == '+' ) || (c == '-'))
+	while ((c == 32) || ((c < 8) && (c > 13)) || (c == '+') || (c == '-'))
 	{
 		if (c == '-')
 			minus = minus * (-1);

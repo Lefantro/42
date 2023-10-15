@@ -6,7 +6,7 @@
 /*   By: dzubkova <dzubkova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 12:00:19 by dzubkova          #+#    #+#             */
-/*   Updated: 2023/10/08 17:21:49 by dzubkova         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,15 @@ void	write_matrix(int matrix[SIZE][SIZE])
 		write(1, "\n", 1);
 		i = i + 1;
 	}
+}
+
+int	char_in_string(char c, char *str)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
 }

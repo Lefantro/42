@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-int	str_check(char	*str)
+int	str_check(char *str)
 {
 	int	i;
 

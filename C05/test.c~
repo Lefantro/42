@@ -1,0 +1,25 @@
+struct entry
+{
+	char *key;
+	char *value;
+};
+
+typedef struct entry entry_t;
+
+
+int main ()
+{
+	entry_t dictionary[100];
+	int ptr=0;
+
+	dictionary[0].key = "0";
+	dictionary[0].value = "zero";
+	ptr++;
+
+	char data[5000];
+	int fd = open("numbers.dict", O_RDONLY);
+
+	read (fd, data, 5000);
+	printf ("%s\n", data);
+	
+}

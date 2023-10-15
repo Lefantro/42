@@ -53,7 +53,7 @@ void	ft_strcpy(char *dest, char *src)
 		*(dest + i) = c;
 		i = i + 1;
 	}
-	*(dest + i ) = ' ';
+	*(dest + i) = ' ';
 	*(dest + i + 1) = '\0';
 }
 
@@ -61,7 +61,7 @@ int	not_number(char *n)
 {
 	while (*n)
 	{
-		if (!(char_in_string (*n, "0123456789")))
+		if (!(char_in_string(*n, "0123456789")))
 			return (1);
 		n++;
 	}
