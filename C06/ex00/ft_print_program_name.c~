@@ -1,0 +1,17 @@
+
+void	ft_putstr(char *str)
+{
+	int	position;
+
+	position = 0;
+	while (str[position] != '\0')
+	{
+		position = position + 1;
+	}
+	write(1, str, position);
+}
+
+int main (int argc, char **argv)
+{
+	ft_putstr (argv[0]);
+}

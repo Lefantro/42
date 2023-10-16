@@ -5,34 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 00:04:56 by aafuni            #+#    #+#             */
-
+/*   Created: 2023/10/16 14:58:43 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/16 16:38:11 by aafuni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int     ft_iterative_factorial (int nb)
+int	ft_iterative_factorial(int nb)
 {
-    int returned;
+	int	returned;
 
-    returned = 1;
+	returned = 1;
 	if (nb == 0)
-		return 1;
-	else if (nb > 0)
-        while (nb)
-        {
-            returned *= nb;
-            nb--;
-        }
-    else
-	{
+		return (1);
+	if (nb < 0)
 		return (0);
+	while (nb)
+	{
+		returned *= nb;
+		nb--;
 	}
 	return (returned);
 }
 
-int main()
-{
-    printf ("%i\n", ft_iterative_factorial (6));
-}
+/* int	main(void) */
+/* { */
+/* 	printf("%i\n", ft_iterative_factorial(-7)); */
+/* } */
