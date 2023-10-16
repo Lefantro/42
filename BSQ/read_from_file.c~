@@ -1,0 +1,17 @@
+
+
+
+void	read_dictionary(char *filename, char *data)
+{
+	int		fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		write(1, "Dict Error\n", 11);
+		return ;
+	}
+	read(fd, data, 5000);
+	close(fd);
+       
+}
