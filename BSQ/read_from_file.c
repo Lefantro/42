@@ -58,6 +58,7 @@ int	main(void)
 		map = build_map(data, map, nr_lines, legend);
 	else
 		return (0);
+	if (map == 0) printf ("map error\n");
 
 
 	
