@@ -1,0 +1,12 @@
+#include <unistd.h>
+
+int		**build_map(char *data, int **map, int nr_lines, char *legend);
+void		print_map (int **map, int nr_lines, char *legend);
+int		build(); // (char *filename);
+
+int main()
+
+{
+  if (build () == 0)
+    write (1, "map error/n", 10);
+}

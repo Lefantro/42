@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int check (int *vector, int i, int size)
+{
+  
+}

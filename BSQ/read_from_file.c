@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 /* In this file: */
-int		read_dictionary(char *filename, char *data);
+int		read_filename(char *filename, char *data);
 int		parse_map(char *data, int **map, int nr_lines, char *legend);
 int		read_first_line(char *data, int *p_nr_lines, char *legend);
 int		read_line(char *line, int row, int **map, char *legend);
@@ -50,9 +50,9 @@ int	solve(char *filename)
 	int		check;
 
 	data = (char *)malloc(sizeof(char) * 5000); // MALLOC data
-	if (read_dictionary(filename, data) == 0)
+	if (read_filename(filename, data) == 0)
 		return (0);
-	line0 = (char *)malloc(sizeof(char) * 20); // MALLOC line0
+	line0 = (char *)malloc(sizeof(char) * 200); // MALLOC line0
 	extract_line(data, line0);
 	legend = (char *)malloc(sizeof(char) * 20);
 
@@ -78,7 +78,7 @@ int main()
 
 /***************************************************************************/
 /***************************************************************************/
-int	read_dictionary(char *filename, char *data)
+int	read_filename(char *filename, char *data)
 {
 	int	fd;
 
@@ -149,16 +149,24 @@ int	read_first_line(char *line0, int *p_nr_lines, char *legend)
 	length = ft_strlen(line0);
 	if (length < 4)
 		return (0); //						map error: first line too short;
+
 	ft_strcpy (legend, line0+(length-3));
 	*(line0 + (length - 3)) = '\0';
+
 	if ((*legend == *(legend + 1)) || (*(legend + 1) == *(legend + 2)))
 		return (0);
 	if (*legend == *(legend + 2))
 		return (0); //						map error: incompatible legend;
+
+	i = 0;
 	while (i < length - 3)
-		if (!(char_in_string(*(line0 + i), "0123456789")))
+	  {
+	    if (!(char_in_string(*(line0 + i), "0123456789")))
 			return (0);
+	    i++;
+	  }
 	//					map error: first line not properly formatted
+
 	*p_nr_lines = ft_atoi(line0);
 	if (*p_nr_lines == 0)
 		return (0);

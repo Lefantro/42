@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int **making_the_map(void)
+{
+  int **map;
+  map = (int*)malloc(sizeof(int*)*100);
+  int i;
+  i = 0;
+  while (i<100)
+    map[i]=(int*)malloc(sizeof(int)*100);
+  return map;
+}
+
+int main()
+{
+  int **map;
+  map = making_the_map ();
+  map[3][4]=5;
+  printf ("%i", map[3][4]);
+}
