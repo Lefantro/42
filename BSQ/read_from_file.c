@@ -9,12 +9,12 @@ int		parse_map(char *data, int **map, int nr_lines, char *legend);
 int		read_first_line(char *data, int *p_nr_lines, char *legend);
 int		read_line(char *line, int row, int **map, char *legend);
 char	*extract_line(char *data, char *line);
-int		**build_map(char *data, int **map, int nr_lines, char *legend);
+int		build_map(char *data, int nr_lines, char *legend);
 void	print_map (int **map, int nr_lines, char *legend);
 
 /* In test.c file: */
 int		**making_the_map(int lines);
-void	free_map(int **map);
+void	free_map(int **map, int nr_lines);
 
 /* In useful functions file: */
 int		char_in_string(char c, char *string);
@@ -24,8 +24,9 @@ void	ft_strcpy(char *dest, char *source);
 
 /************************************************************************/
 
-int	**build_map(char *data, int **map, int nr_lines, char *legend)
+int	build_map(char *data, int nr_lines, char *legend)
 {
+	int **map;
 	int	check;
 	map = making_the_map(nr_lines);
 	check = 1;
@@ -34,43 +35,49 @@ int	**build_map(char *data, int **map, int nr_lines, char *legend)
 	if (check == 0)
 		return 0;
 	print_map (map, nr_lines, legend);
-	return map;
+		free_map(map, nr_lines);
+	return 1;
 		// map errors from other lines;
 }
 /****************************************************************************/
-int	main(void)
+int	solve(char *filename)
 {
-	int		**map;
+	int		map;
 	int		nr_lines;
 	char	*legend;
 	char	*line0;
 	char	*data;
 	int		check;
 
-	data = (char *)malloc(sizeof(char) * 5000);
-	if (read_dictionary("map.in", data) == 0)
+	data = (char *)malloc(sizeof(char) * 5000); // MALLOC data
+	if (read_dictionary(filename, data) == 0)
 		return (0);
-	line0 = (char *)malloc(sizeof(char) * 20);
+	line0 = (char *)malloc(sizeof(char) * 20); // MALLOC line0
 	extract_line(data, line0);
 	legend = (char *)malloc(sizeof(char) * 20);
 
 	if (read_first_line(line0, &nr_lines, legend)) // call map error from line0
-		map = build_map(data, map, nr_lines, legend);
+		map=build_map(data, nr_lines, legend);
 	else
 		return (0);
-	if (map == 0) printf ("map error\n");
+	if (map == 0)
+		return 0;
+	free(line0);					// FREE line0
+	free(data);							// FREE data
 
-
-	
-
-	free(line0);
-	free(data);
-	//free_map(map, nr_lines);
 	return (check); // 0 in case of map errors
 }
 
+/**************************************************************************/
 /***************************************************************************/
 
+int main()
+{
+	solve("map2.in");
+}
+
+/***************************************************************************/
+/***************************************************************************/
 int	read_dictionary(char *filename, char *data)
 {
 	int	fd;
