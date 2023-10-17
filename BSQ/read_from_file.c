@@ -1,172 +1,203 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int	read_dictionary(char *filename, int **map, int lines, char *legend);
-int	parse_map(char *data, int **map, int lines, char *legend);
-int	read_first_line (char *data, int lines, char *legend);
-int	read_line (char *lines, int **map, int count_lines, char *legend);
+/* In this file: */
+int		read_dictionary(char *filename, char *data);
+int		parse_map(char *data, int **map, int nr_lines, char *legend);
+int		read_first_line(char *data, int *p_nr_lines, char *legend);
+int		read_line(char *line, int row, int **map, char *legend);
+char	*extract_line(char *data, char *line);
+int		**build_map(char *data, int **map, int nr_lines, char *legend);
+void	print_map (int **map, int nr_lines, char *legend);
 
-int	**making_the_map (int lines);
-void	free_map (int **map);
-  
-int	char_in_string (char c, char *string);
-int	ft_atoi (char *string);
-int	ft_strlen (char *string);
-void	ft_strcpy (char *dest, char *source);
+/* In test.c file: */
+int		**making_the_map(int lines);
+void	free_map(int **map);
 
-/******************************************************************************/
-int main()
+/* In useful functions file: */
+int		char_in_string(char c, char *string);
+int		ft_atoi(char *string);
+int		ft_strlen(char *string);
+void	ft_strcpy(char *dest, char *source);
+
+/************************************************************************/
+
+int	**build_map(char *data, int **map, int nr_lines, char *legend)
 {
-  int **map;
-  int lines;
-  char *legend;
+	int	check;
+	map = making_the_map(nr_lines);
+	check = 1;
+	printf("check: %s %i\n", legend, nr_lines); //			CHECKPOINT
+	check = check * parse_map(data, map, nr_lines, legend);
+	if (check == 0)
+		return 0;
+	print_map (map, nr_lines, legend);
+	return map;
+		// map errors from other lines;
+}
+/****************************************************************************/
+int	main(void)
+{
+	int		**map;
+	int		nr_lines;
+	char	*legend;
+	char	*line0;
+	char	*data;
+	int		check;
 
-  legend = (char*)malloc(sizeof(char)*20);
-  
-  read_dictionary ("map.in", map, lines, legend);
-  printf ("%s", legend);
+	data = (char *)malloc(sizeof(char) * 5000);
+	if (read_dictionary("map.in", data) == 0)
+		return (0);
+	line0 = (char *)malloc(sizeof(char) * 20);
+	extract_line(data, line0);
+	legend = (char *)malloc(sizeof(char) * 20);
+
+	if (read_first_line(line0, &nr_lines, legend)) // call map error from line0
+		map = build_map(data, map, nr_lines, legend);
+	else
+		return (0);
+
+
+	
+
+	free(line0);
+	free(data);
+	//free_map(map, nr_lines);
+	return (check); // 0 in case of map errors
 }
 
 /***************************************************************************/
 
-int	read_dictionary(char *filename, int **map, int lines, char *legend)
+int	read_dictionary(char *filename, char *data)
 {
-	int		fd;
-	char        *data;
-	int	check;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		write(1, "map error\n", 10);
-		return 0;
+		return (0);
 	}
-
-	data = (char*)malloc(sizeof(char)*5000);
 	read(fd, data, 5000);
 	close(fd);
-	printf ("%s\n", data);	       //check #.1 - printing out the map
-	check = parse_map (data, map, lines, legend);
-	free(data);
-	if (check == 0)
-	  return 0;		//call map error 1, map error 2, map error 3, map error 4
-	return lines;
+	printf("%s\n", data); //					CHECKPOINT
+	return (1);
 }
 
+/***********************************************************************/
 
-/*************************************************************************/
-
-int parse_map (char *data, int **map, int nr_lines, char *legend)
+int	parse_map(char *data, int **map, int nr_lines, char *legend)
 {
-  char *line;
-  int i;
-  int check;
-  int count_lines;
-  
-  
-  if (ft_strlen(data) < 5 )
-    return 0;			//map error 1: the total length of the file is smaller than 5
+	char	*line;
+	char	check;
+	int		line_counter;
 
-  
-  check = read_first_line (data, nr_lines, legend);  // read the fist line
-  printf ("%c\n", *data); //checkpoint checkpoint checkpoint
-  
-  if (read_first_line (line, nr_lines, legend))
-      return 0;		//map error 3, map error 4
-    
-  i = 0;
-  while ((*data != '\n') && (*data)) //skip first line
-    {
-      data++;
-      i++;
-    }
-  if (i < 4)
-    return 0;      //map error 2 : the total tength of the first line is smaller than 4
-
-  data++;	       //skip the \n after the first line;
-
-  
-
-  
-  count_lines = 0;
-  while (*data)
-    {
-      i = 0;
-      line = (char*)malloc(sizeof(char)*(nr_lines+2));
-      while ((*data != '\n')&&(*data))
+	if (ft_strlen(data) < 6)
+		return (0); //			map error: not enough chars for a 1x1 map
+	line = (char *)malloc(sizeof(char) * 20);
+	data = extract_line(data, line);
+	line_counter = 0;
+	while (*data)
 	{
-	  *(line + i) = *data;
-	  data++;
-	  i++;
+		data = extract_line(data, line);
+		if (ft_strlen(line) != nr_lines)
+			return (0); //		map error: line too short/long
+		check = read_line(line, line_counter, map, legend);
+		if (check == 0)
+			return (0); //		call map errors from read_line (lines 1 - n)
+		line_counter++;
 	}
-      if (ft_strlen(line) == nr_lines)
-	check = read_line(line, map, count_lines, legend);
-      else
-	return 0; //line bigger or smaller than expected;
-      
-      if (check == 0 )
-	return 0; //call errors from read_line
-      count_lines ++;
-      free (line);
-    }
-
-  
- return 1;
+	free(line);
+	if (line_counter != nr_lines)
+		return (0); //			map error: too many or too few lines
+	return (1);
 }
 
+/***********************************************************************/
 
-  /********************************************************************/
-
-  int read_first_line (char *data, int nr_lines, char *legend)
+char	*extract_line(char *data, char *line)
 {
-  int length;
-  int i;
-  char number_lines[15];
-  char *line0;
-  
-  printf ("checkpoint read_first_line\n"); //checkpoint checkpoint checkpoint
-
-  i = 0;
-  line0 = (char*)malloc(sizeof(char)*20);
-  while ((*data != '\n') && (*data))
-    {
-      *(line0 + i) = *data;
-      data++;
-      i++;
-    }
-  i = 0;
-  length = ft_strlen (line0);
-  if (length < 4)
-    return 0; 
-  printf ("check : %s\n", line0); // checkpoint!!!
-
-
-
-
-
-
-  
-  while (i < length - 3 )
-    {
-      if (!(char_in_string (*line0, "0123456789")))
-	  return 0; //map error 3 : the first n-3 characters on the first line are not all numbers
-      *(number_lines + i) = *line0;
-      line0++;
-      i++;
-    }
-  nr_lines = ft_atoi (number_lines);
-  ft_strcpy(legend, line0);
-  if ((legend[0] == legend [1]) || (legend[1]==legend[2]) || (legend[2] == legend[0]))
-    return 0; //map error 4: the three characters (empty, obstacle, full) are not distinct
-  printf ("number of lines is %i and the legend is '%s'\n", nr_lines, legend); //check #6
-  return 1;
+	while ((*data) && (*data != '\n'))
+	{
+		*line = *data;
+		line++;
+		data++;
+	}
+	*line = '\0';
+	if (*data)
+		data++;
+	return (data);
 }
 
-/**************************************************************/
+/*******************************************************************/
 
-int	read_line (char *lines, int **map, int count_lines, char *legend)
+int	read_first_line(char *line0, int *p_nr_lines, char *legend)
 {
-  return 1;
+	int	length;
+	int	i;
+
+	length = ft_strlen(line0);
+	if (length < 4)
+		return (0); //						map error: first line too short;
+	ft_strcpy (legend, line0+(length-3));
+	*(line0 + (length - 3)) = '\0';
+	if ((*legend == *(legend + 1)) || (*(legend + 1) == *(legend + 2)))
+		return (0);
+	if (*legend == *(legend + 2))
+		return (0); //						map error: incompatible legend;
+	while (i < length - 3)
+		if (!(char_in_string(*(line0 + i), "0123456789")))
+			return (0);
+	//					map error: first line not properly formatted
+	*p_nr_lines = ft_atoi(line0);
+	if (*p_nr_lines == 0)
+		return (0);
+	//						map error: declared number of lines = 0;
+	return (1);
 }
+
+/********************************************************************/
+
+int	read_line(char *line, int row, int **map, char *legend)
+{
+	int	column;
+
+	column = 0;
+	while (*line)
+	{
+		if (*line == legend[0])
+			map[row][column] = 0;
+		else if (*line == legend[1])
+			map[row][column] = 1;
+		else
+			return (0); //				map error: map contains forbidden char
+		column++;
+		line++;
+	}
+	return (1);
+}
+
+/******************************************************/
+
+void print_map (int **map, int nr_lines, char *legend)
+{
+	int i;
+	int j;
+
+	map[0][2] = 2; //		//		//		CHECKPOINT
+	i = 0;
+	while (i < nr_lines)
+	{
+		j = 0;
+		while (j < nr_lines)
+		{
+			write (1, &legend[map[i][j]], 1);
+			j++;
+		}
+		i++;
+		write (1, "\n", 1);
+	}
+}
+

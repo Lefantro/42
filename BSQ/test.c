@@ -6,31 +6,31 @@
 /*   By: aschenk <aschenk@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:48:34 by aschenk           #+#    #+#             */
-/*   Updated: 2023/10/16 20:48:35 by aschenk          ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 
-
-int **making_the_map (int lines)
+int **making_the_map (int nr_lines)
 {
   int i = 0;
   int **map;
 
-  map = (int**)malloc(sizeof(int*)*(lines+2));
-  while (i<n)
+  map = (int**)malloc(sizeof(int*)*(nr_lines+2));
+  while (i < nr_lines)
     {
-      map[i]=(int*)malloc(sizeof(int)*(lies+2));
+      map[i]=(int*)malloc(sizeof(int)*(nr_lines+2));
       i++;
     }
   return map;
 }
 
-void free_map (int **map)
+void free_map (int **map, int nr_lines)
 {
   int i;
   i = 0;
-  while (i<n)
+  while (i < nr_lines)
     {
       free(map[i]);
       i++;
