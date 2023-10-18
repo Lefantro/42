@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*In this file: */
-int		char_in_string(char c, char *string);
-int		ft_atoi(char *string);
-int		ft_strlen(char *string);
-void	ft_strcpy(char *dest, char *source);
+int char_in_string (char c, char *string);
+int ft_atoi (char *string);
+int ft_strlen (char *string);
+void ft_strcpy (char *dest, char *source);
 
-/***************************************/
 int	char_in_string(char c, char *str)
 {
 	while (*str)
@@ -19,7 +17,6 @@ int	char_in_string(char c, char *str)
 	return (0);
 }
 
-/****************************************/
 int	ft_strlen(char *str)
 {
 	int	position;
@@ -32,7 +29,6 @@ int	ft_strlen(char *str)
 	return (position);
 }
 
-/*****************************************/
 int	ft_atoi(char *str)
 {
 	int		minus;
@@ -42,7 +38,7 @@ int	ft_atoi(char *str)
 	number = 0;
 	minus = 1;
 	c = *str;
-	while ((c == 32) || ((c < 8) && (c > 13)) || (c == '+') || (c == '-'))
+	while ((c == 32) || ((c < 8) && (c > 13)) || (c == '+' ) || (c == '-'))
 	{
 		if (c == '-')
 			minus = minus * (-1);
@@ -58,18 +54,47 @@ int	ft_atoi(char *str)
 	return (number);
 }
 
-/******************************************************/
 void	ft_strcpy(char *dest, char *src)
 {
-	int		i;
-	char	c;
-
+	int	i;
+	char c;
+	
 	i = 0;
 	while (*(src + i))
 	{
-		c = *(src + i);
+		c = *(src+i);
 		*(dest + i) = c;
 		i = i + 1;
 	}
 	*(dest + i) = '\0';
+}
+
+
+int not_number (char *n)
+{
+  while (*n)
+    {
+      if (!(char_in_string (*n, "0123456789")))
+	return 1;
+      n++;
+    } 
+  return 0;
+}
+
+
+char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	size_dest;
+
+	size_dest = ft_strlen(dest);
+	i = 0;
+	while (*(src + i))
+	{
+		*(dest + size_dest + i) = *(src + i);
+		i++;
+	}
+	*(dest + size_dest + i) = ' ';
+	*(dest + size_dest + i + 1) = '\0';
+	return (dest);
 }

@@ -1,12 +1,10 @@
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-int		**build_map(char *data, int **map, int nr_lines, char *legend);
-void		print_map (int **map, int nr_lines, char *legend);
-int		build(); // (char *filename);
-
-int main()
-
+int	main(void)
 {
-  if (build () == 0)
-    write (1, "map error/n", 10);
+	if (solve("maptest.in", 0) == 0)
+		write(2, "map error\n", 10);
 }
