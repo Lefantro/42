@@ -35,17 +35,15 @@ int	ft_strlen(char *str)
 /*****************************************/
 int	ft_atoi(char *str)
 {
-
 	int		number;
 	char	c;
 
 	number = 0;
 	c = *str;
-
 	while ((*str >= '0') && (*str <= '9'))
 	{
 		c = *str;
-		number = number * 10 + (c - '0') ;
+		number = number * 10 + (c - '0');
 		str++;
 	}
 	return (number);
