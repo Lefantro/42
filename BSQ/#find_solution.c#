@@ -1,5 +1,0 @@
-int *find_solution (int **map)
-{
-	int *solution;
-	
-}

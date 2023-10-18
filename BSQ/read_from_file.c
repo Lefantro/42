@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_from_file.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 14:58:18 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/18 15:11:51 by aafuni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +20,6 @@ int		read_filename(char *filename, char *data);
 int		build_map(char *data, int nr_lines, char *legend);
 int		solve(char *filename, int read_from_input);
 int		process_data(char *data);
-
 
 /* In line.c file: */
 int		parse_map(char *data, int **map, int nr_lines, char *legend);
@@ -26,13 +37,16 @@ void	solve_map(int **map, int nr_lines);
 int		**making_the_map(int lines);
 void	free_map(int **map, int nr_lines);
 
+/* In read_from_standard_input.c file: */
+int 	read_from_standard_input(char *data);
+
+
 /* In useful_functions or more_useful_functions.c file: */
 int		char_in_string(char c, char *string);
 int		ft_atoi(char *string);
 int		ft_strlen(char *string);
 void	ft_strcpy(char *dest, char *source);
 void	print_map(int **map, int nr_lines, char *legend);
-
 
 /************************************************************************/
 
@@ -57,14 +71,12 @@ int	build_map(char *data, int nr_lines, char *legend)
 /****************************************************************************/
 int	solve(char *filename, int read_from_input)
 {
-
 	char	*data;
 	int		check;
 
 	data = (char *)malloc(sizeof(char) * 5000);
 	if (read_from_input == 1)
-		data="   ";
-	// read_from_standard_input(data);
+		check = read_from_standard_input(data);
 	else if (read_filename(filename, data) == 0)
 	{
 		free(data);
@@ -79,7 +91,6 @@ int	solve(char *filename, int read_from_input)
 
 int process_data(char *data)
 {
-	int		map;
 	int		nr_lines;
 	char	*legend;
 	char	*line0;
@@ -90,9 +101,7 @@ int process_data(char *data)
 	extract_line(data, line0);
 	check = read_first_line(line0, &nr_lines, legend);
 	if (check)
-		map = build_map(data, nr_lines, legend);
-	if (map == 0)
-		check = 0;
+		check = check * build_map(data, nr_lines, legend);
 	free(line0);
 	free(legend);
 	return check;

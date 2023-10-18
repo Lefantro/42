@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   more_useful_functions.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 15:06:11 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/18 15:06:14 by aafuni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -25,8 +37,7 @@ char	*ft_strcat(char *dest, char *src)
 		*(dest + size_dest + i) = *(src + i);
 		i++;
 	}
-	*(dest + size_dest + i) = ' ';
-	*(dest + size_dest + i + 1) = '\0';
+	*(dest + size_dest + i) = '\0';
 	return (dest);
 }
 
@@ -49,3 +60,5 @@ void	print_map(int **map, int nr_lines, char *legend)
 		write(1, "\n", 1);
 	}
 }
+
+/*************************************/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aafuni <aafuni@student.42berlin.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 14:56:46 by aafuni            #+#    #+#             */
+/*   Updated: 2023/10/18 15:11:14 by aafuni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,10 +18,9 @@
 /* In this file: */
 
 int		sum(int **map, int r, int c, int size);
-void	find_solution (int *solution, int **map, int nr_lines);
-void	fill_map (int **map, int *rcs_solution);
-void	solve_map (int **map, int nr_lines);
-
+void	find_solution(int *solution, int **map, int nr_lines);
+void	fill_map(int **map, int *rcs_solution);
+void	solve_map(int **map, int nr_lines);
 
 /* In this read_file.c file: */
 int		read_dictionary(char *filename, char *data);
@@ -18,11 +29,14 @@ int		read_first_line(char *data, int *p_nr_lines, char *legend);
 int		read_line(char *line, int row, int **map, char *legend);
 char	*extract_line(char *data, char *line);
 int		**build_map(char *data, int **map, int nr_lines, char *legend);
-void	print_map (int **map, int nr_lines, char *legend);
+void	print_map(int **map, int nr_lines, char *legend);
 
 /* In test.c file: */
 int		**making_the_map(int lines);
 void	free_map(int **map);
+
+/* In read_standard_input.c file: */
+int 	read_from_standard_input(char *data);
 
 /* In useful functions file: */
 int		char_in_string(char c, char *string);
@@ -30,27 +44,27 @@ int		ft_atoi(char *string);
 int		ft_strlen(char *string);
 void	ft_strcpy(char *dest, char *source);
 
-/*********************************************************************************/
+/*************************************************************/
 
-
-int sum (int **map, int r, int c, int size)
+int	sum(int **map, int r, int c, int size)
 {
-	int i;
-	int j;
-	int sum;
+	int	i;
+	int	j;
+	int	sum;
+
 	sum = 0;
 	i = r;
 	while (i < r + size)
 	{
 		j = c;
-		while (j<c + size)
+		while (j < c + size)
 		{
-			sum+= map[i][j];
+			sum += map[i][j];
 			j++;
 		}
 		i++;
 	}
-	return sum;
+	return (sum);
 }
 
 /*******************************************************************/
@@ -89,7 +103,6 @@ void fill_map (int **map, int *rcs_solution)
 {
 	int i;
 	int j;
-	printf ("Solution: r, c, size: %i %i %i\n", rcs_solution[0], rcs_solution[1], rcs_solution[2]);
 	i = rcs_solution[0];
 	while (i < rcs_solution[0] + rcs_solution[2])
 	{

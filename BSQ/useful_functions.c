@@ -35,24 +35,16 @@ int	ft_strlen(char *str)
 /*****************************************/
 int	ft_atoi(char *str)
 {
-	int		minus;
 	int		number;
 	char	c;
 
 	number = 0;
-	minus = 1;
 	c = *str;
-	while ((c == 32) || ((c < 8) && (c > 13)) || (c == '+') || (c == '-'))
-	{
-		if (c == '-')
-			minus = minus * (-1);
-		str++;
-		c = *str;
-	}
+
 	while ((*str >= '0') && (*str <= '9'))
 	{
 		c = *str;
-		number = number * 10 + (c - '0') * minus;
+		number = number * 10 + (c - '0');
 		str++;
 	}
 	return (number);
